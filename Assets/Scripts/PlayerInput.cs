@@ -7,6 +7,8 @@ public class PlayerInput : MonoBehaviour
     public float moveHorizontal { get; private set; }
     public float moveVertical { get; private set; }
     public Vector2 rotate {  get; private set; }
+    public bool attack {  get; private set; }
+    public bool reload {  get; private set; }
 
     private void OnEnable()
     {
@@ -29,5 +31,7 @@ public class PlayerInput : MonoBehaviour
         }
 
         rotate = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        attack = Input.GetButton("Fire1");
+        reload = Input.GetButtonDown("Reload");
     }
 }

@@ -4,29 +4,21 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField]
-    private float moveSpeed;
-    [SerializeField]
-    private float rotateSpeed;
-
-    [SerializeField]
-    private float maxVertAngle;
-    [SerializeField]
-    private float minVertAngle;
+    [SerializeField] private float moveSpeed;
+    [SerializeField] private float rotateSpeed;
+    [SerializeField] private float maxVertAngle;
+    [SerializeField] private float minVertAngle;
+    [SerializeField] private Transform followTarget;
 
     private PlayerInput playerInput;
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
-
-    [SerializeField]
-    private Transform followTarget;
 
     private void Start()
     {
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-        Cursor.visible = false;
     }
 
     private void FixedUpdate()
@@ -65,7 +57,7 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 rotateAngle = rotateSpeed * playerInput.rotate * Time.deltaTime;
         Vector3 newAngle = Vector3.zero;
-
+        
         // eulerAngles는 0 ~ 360도의 값을 반환하기 때문에 180도를 넘어가는 값에 대해서는 360도를 빼주어야 한다.
         newAngle.x = followTarget.localEulerAngles.x - rotateAngle.y;
         newAngle.x = Mathf.Clamp((newAngle.x >= 180.0f) ? newAngle.x - 360.0f : newAngle.x, -20.0f, 20.0f);

@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [SerializeField] Weapon weapon;
-
+    [SerializeField] private Weapon weapon;
     [SerializeField] private PlayerInput playerInput;
 
     private Animator playerAnimator;
@@ -13,7 +12,6 @@ public class PlayerAttack : MonoBehaviour
     private void Start()
     {
         playerAnimator = GetComponent<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()

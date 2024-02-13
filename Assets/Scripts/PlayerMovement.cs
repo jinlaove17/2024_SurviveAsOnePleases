@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody playerRigidbody;
     private Animator playerAnimator;
 
-    private void Start()
+    private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody>();
@@ -29,11 +29,11 @@ public class PlayerMovement : MonoBehaviour
     {
         switch (playerInput.aim)
         {
-            case 1:
+            case 1: // GetMouseButtonDown(1)
                 followCamera.gameObject.SetActive(false);
                 aimCamera.gameObject.SetActive(true);
                 break;
-            case 2:
+            case 3: // GetMouseButtonUp(1)
                 aimCamera.gameObject.SetActive(false);
                 followCamera.gameObject.SetActive(true);
                 break;

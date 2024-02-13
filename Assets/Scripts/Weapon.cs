@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
@@ -30,7 +28,7 @@ public abstract class Weapon : MonoBehaviour
 
     public AudioSource audioSource { get; protected set; }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         audioSource = GetComponent<AudioSource>();
     }

@@ -9,7 +9,7 @@ public class PlayerAttack : MonoBehaviour
 
     private Animator playerAnimator;
 
-    private void Start()
+    private void Awake()
     {
         playerAnimator = GetComponent<Animator>();
     }

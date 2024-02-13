@@ -35,19 +35,25 @@ public class PlayerInput : MonoBehaviour
         rotate = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         attack = Input.GetButton("Fire1");
         reload = Input.GetButtonDown("Reload");
-        around = Input.GetKey(KeyCode.LeftAlt);
 
         if (Input.GetMouseButtonDown(1))
         {
             aim = 1;
         }
-        else if (Input.GetMouseButtonUp(1))
+        else if (Input.GetMouseButton(1))
         {
             aim = 2;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            aim = 3;
         }
         else
         {
             aim = 0;
         }
+
+        // 공격, 줌 중에는 둘러보기 기능을 사용할 수 없음
+        around = (((attack) || (aim != 0)) ? false : Input.GetKey(KeyCode.LeftAlt));
     }
 }

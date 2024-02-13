@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: Gun Data
   m_EditorClassIdentifier: 
   weaponName: Pistol Heavy
-  state: 0
   attackDamage: 10
   attackRange: 50
-  attackSpeed: 0.15
+  attackSpeed: 0.3
   attackClip: {fileID: 8300000, guid: 3793b2e917271a143945b403b24b2f7f, type: 3}
-  startAmmo: 100
-  magCapacity: 25
+  startAmmo: 50
+  magCapacity: 7
   reloadTime: 1.5
   reloadClip: {fileID: 8300000, guid: 6f0f629ecd848004b846ae8865ef3f38, type: 3}

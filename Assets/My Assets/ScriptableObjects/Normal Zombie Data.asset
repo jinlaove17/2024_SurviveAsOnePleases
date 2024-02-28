@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 560d65184fc3f914ca6ea2e7b3938ffb, type: 3}
+  m_Name: Normal Zombie Data
+  m_EditorClassIdentifier: 
+  zombieName: Normal Zombie
+  maxHp: 100
+  moveSpeed: 0.2
+  attackDamage: 10
+  attackSpeed: 1
+  attackRange:
+    center: {x: 0, y: 1, z: 0.25}
+    size: {x: 0.5, y: 1, z: 0.5}
+  senseRadius: 5
+  hitClip: {fileID: 8300000, guid: 3a525d24d47f5074f9df0d1501f2e426, type: 3}
+  deathClip: {fileID: 8300000, guid: 5f9b6fb006c001a44bc5fb97829058ae, type: 3}

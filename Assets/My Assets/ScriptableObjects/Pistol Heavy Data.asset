@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Pistol Heavy Data
   m_EditorClassIdentifier: 
   weaponName: Pistol Heavy
-  attackDamage: 10
+  attackDamage: 50
   attackSpeed: 0.1
   attackRange: 50
   attackClip: {fileID: 8300000, guid: 3793b2e917271a143945b403b24b2f7f, type: 3}

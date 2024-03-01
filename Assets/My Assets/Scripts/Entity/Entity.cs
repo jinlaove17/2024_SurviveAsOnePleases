@@ -89,4 +89,16 @@ public class Entity : MonoBehaviour, IDamageable
             onDeath();
         }
     }
+
+    protected void Inactive(float duration)
+    {
+        StartCoroutine(InactiveRoutine(duration));
+    }
+
+    private IEnumerator InactiveRoutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        gameObject.SetActive(false);
+    }
 }

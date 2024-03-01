@@ -13,8 +13,7 @@ public class Zombie : Entity
     public FiniteStateMachine<Zombie> fsm { get; private set; }
     protected Coroutine patrolRoutine { get; set; }
     public Entity target { get; private set; }
-
-    private Vector3[] pathCorners; // Debug
+    private Vector3[] pathCorners { get; set; } // Debug
 
     protected override void Awake()
     {
@@ -22,14 +21,18 @@ public class Zombie : Entity
         animator = GetComponent<Animator>();
         navMeshAgent = GetComponent<NavMeshAgent>();
         fsm = new FiniteStateMachine<Zombie>();
-        fsm.ChangeState(this, ZombiePatrolState.instance);
+        onDeath += () => Inactive(5.0f);
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
         hp = zombieData.maxHp;
+        isAttack = false;
+        lastAttackTime = Time.time;
         navMeshAgent.speed = zombieData.moveSpeed;
+        navMeshAgent.enabled = true;
+        fsm.ChangeState(this, ZombiePatrolState.instance);
         target = null;
     }
 
@@ -110,6 +113,7 @@ public class Zombie : Entity
     public override void Die()
     {
         base.Die();
+        StopCoroutine(patrolRoutine);
         navMeshAgent.enabled = false;
         animator.SetTrigger("Die");
         audioSource.PlayOneShot(zombieData.deathClip);
@@ -129,7 +133,7 @@ public class Zombie : Entity
         NavMeshHit navMeshHit;
 
         // zombieData.senseRadius 반경 안에서, randomPos에 가장 가까운 내비메시 위의 한 점을 찾아 목적지로 설정
-        NavMesh.SamplePosition(randomPos, out navMeshHit, zombieData.senseRadius, NavMesh.AllAreas);
+        while (!NavMesh.SamplePosition(randomPos, out navMeshHit, zombieData.senseRadius, NavMesh.AllAreas)) { }
 
         NavMeshPath navMeshPath = new NavMeshPath();
 
@@ -207,6 +211,7 @@ public class Zombie : Entity
             {
                 isAttack = true;
                 lastAttackTime = Time.time;
+                transform.LookAt(target.transform);
                 navMeshAgent.isStopped = true;
                 animator.SetBool("Chase", false);
                 animator.SetFloat("Attack Speed", 1.0f / zombieData.attackSpeed);

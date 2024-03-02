@@ -32,7 +32,7 @@ public class ZombieSpawner : MonoBehaviour
 
         while (!NavMesh.SamplePosition(randomPos, out navMeshHit, 3.0f, NavMesh.AllAreas)) { }
         
-        Zombie zombie = PoolManager.instance.GetObject<Zombie>(zombiePrefab.name, navMeshHit.position);
+        Zombie zombie = PoolManager.instance.GetObject<Zombie>(zombiePrefab.name, navMeshHit.position, spawnPoint.rotation);
 
         zombie.onDeath += () => --aliveCount;
         ++aliveCount;

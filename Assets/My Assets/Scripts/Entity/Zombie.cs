@@ -114,6 +114,7 @@ public class Zombie : Entity
     {
         base.Die();
         StopCoroutine(patrolRoutine);
+        collider.enabled = false;
         navMeshAgent.enabled = false;
         animator.SetTrigger("Die");
         audioSource.PlayOneShot(zombieData.deathClip);

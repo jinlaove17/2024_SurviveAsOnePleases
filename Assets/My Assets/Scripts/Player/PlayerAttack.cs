@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [field: SerializeField] private Transform weaponPivot { get; set; }
     [field: SerializeField] private Weapon weapon { get; set; }
     private PlayerInput playerInput { get; set; }
     private Animator playerAnimator { get; set; }
@@ -41,6 +42,9 @@ public class PlayerAttack : MonoBehaviour
         {
             return;
         }
+
+        // 무기의 기준점 weaponPivot을 3D 모델의 오른쪽 팔꿈치 위로 이동
+        weaponPivot.position = playerAnimator.GetIKHintPosition(AvatarIKHint.RightElbow);
 
         // IK를 사용하여 오른손의 위치와 회전을 총의 오른쪽 손잡이에 맞춤
         playerAnimator.SetIKPositionWeight(AvatarIKGoal.RightHand, 1.0f);

@@ -33,17 +33,6 @@ public class PoolManager : MonoSingleton<PoolManager>
         }
     }
 
-    private void Start()
-    {
-        for (int i = 0; i < 5; ++i)
-        {
-            float x = UnityEngine.Random.Range(-6.0f, 6.0f);
-            float z = UnityEngine.Random.Range(-6.0f, 6.0f);
-
-            GetObject("Normal Zombie", new Vector3(x, 0.0f, z));
-        }
-    }
-
     public GameObject GetObject(string tag, Vector3 position)
     {
         return GetObjectFromPool(tag, position, Quaternion.identity);

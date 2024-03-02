@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour, IDamageable
 {
-    [field: SerializeField] public float hp { get; protected set; }
+    public float hp { get; protected set; }
     public bool isDamaged { get; protected set; }
     private List<Material> materials { get; set; }
+    public Collider collider { get; protected set; }
     public AudioSource audioSource { get; private set; }
 
     public event Action onDeath; // 사망시 발동할 이벤트
@@ -23,6 +24,7 @@ public class Entity : MonoBehaviour, IDamageable
     protected virtual void Awake()
     {
         materials = new List<Material>();
+        collider = GetComponent<Collider>();
         audioSource = GetComponent<AudioSource>();
 
         Renderer[] renderers = GetComponentsInChildren<Renderer>();
@@ -41,6 +43,7 @@ public class Entity : MonoBehaviour, IDamageable
     protected virtual void OnEnable()
     {
         isDamaged = false;
+        collider.enabled = true;
     }
 
     public virtual void OnDamage(Entity from, float damage, Vector3 hitPoint, Vector3 hitNormal)

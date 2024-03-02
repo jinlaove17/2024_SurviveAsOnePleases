@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ public abstract class Weapon : MonoBehaviour
 {
     public enum STATE
     {
+        NONE,
         READY,
         WAIT
     }
@@ -24,10 +26,12 @@ public abstract class Weapon : MonoBehaviour
     public EQUIP_TYPE equipType { get; protected set; }
     public float lastAttackTime { get; protected set; }
     public AudioSource audioSource { get; private set; }
+    public CinemachineImpulseSource cinemachineImpulseSource { get; private set; }
 
     protected virtual void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        cinemachineImpulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
     protected virtual void OnEnable()

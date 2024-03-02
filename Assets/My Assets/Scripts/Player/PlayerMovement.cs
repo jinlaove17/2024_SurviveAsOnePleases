@@ -61,10 +61,12 @@ public class PlayerMovement : MonoBehaviour
             case PlayerInput.AIM_STATE.ZOOM_IN: // GetMouseButtonDown(1)
                 followCamera.gameObject.SetActive(false);
                 aimCamera.gameObject.SetActive(true);
+                verticalAngle /= 2.0f;
                 break;
             case PlayerInput.AIM_STATE.ZOOM_OUT: // GetMouseButtonUp(1)
                 followCamera.gameObject.SetActive(true);
                 aimCamera.gameObject.SetActive(false);
+                verticalAngle *= 2.0f;
                 break;
         }
     }

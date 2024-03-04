@@ -10,7 +10,7 @@ public class PlayerHealth : Entity
     {
         base.OnEnable();
         hp = maxHp;
-        UiManager.instance.SetPlayerHpBar(hp, maxHp);
+        UiManager.instance.playerStatusUi.hpBar.UpdateHpBar(maxHp, hp);
     }
 
     public override void OnDamage(Entity from, float damage, Vector3 hitPoint, Vector3 hitNormal)
@@ -21,6 +21,6 @@ public class PlayerHealth : Entity
         }
 
         base.OnDamage(from, damage, hitPoint, hitNormal);
-        UiManager.instance.SetPlayerHpBar(maxHp, hp);
+        UiManager.instance.playerStatusUi.hpBar.UpdateHpBar(maxHp, hp);
     }
 }

@@ -73,7 +73,7 @@ public class Gun : Weapon
 
         magAmmo += ammoToFill;
         remainAmmo -= ammoToFill;
-        UiManager.instance.SetAmmoText(magAmmo, remainAmmo);
+        UiManager.instance.playerStatusUi.SetAmmoText(magAmmo, remainAmmo);
         state = STATE.READY;
     }
 
@@ -103,7 +103,7 @@ public class Gun : Weapon
         audioSource.PlayOneShot(weaponData.attackClip);
         cinemachineImpulseSource.GenerateImpulse();
         --magAmmo;
-        UiManager.instance.SetAmmoText(magAmmo, remainAmmo);
+        UiManager.instance.playerStatusUi.SetAmmoText(magAmmo, remainAmmo);
 
         if (magAmmo <= 0)
         {

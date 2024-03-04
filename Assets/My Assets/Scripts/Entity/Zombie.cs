@@ -22,6 +22,7 @@ public class Zombie : Entity
         navMeshAgent = GetComponent<NavMeshAgent>();
         fsm = new FiniteStateMachine<Zombie>();
         onDeath += () => Inactive(5.0f);
+        onDeath += () => UiManager.instance.enemyStatusUi.gameObject.SetActive(false); // 좀비가 죽으면 상태 UI를 비활성화 한다.
     }
 
     protected override void OnEnable()
@@ -82,6 +83,9 @@ public class Zombie : Entity
             }
             
             audioSource.PlayOneShot(zombieData.hitClip);
+            UiManager.instance.enemyStatusUi.gameObject.SetActive(true);
+            UiManager.instance.enemyStatusUi.hpBar.SetSliderValue((hp + damage) / zombieData.maxHp);
+            UiManager.instance.enemyStatusUi.hpBar.UpdateHpBar(zombieData.maxHp, hp);
         }
     }
 

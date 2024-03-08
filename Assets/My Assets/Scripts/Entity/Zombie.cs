@@ -138,6 +138,8 @@ public class Zombie : Entity
         NavMeshHit navMeshHit;
 
         // zombieData.senseRadius 반경 안에서, randomPos에 가장 가까운 내비메시 위의 한 점을 찾아 목적지로 설정
+        randomPos.y = 0.0f;
+
         while (!NavMesh.SamplePosition(randomPos, out navMeshHit, zombieData.senseRadius, NavMesh.AllAreas)) { }
 
         NavMeshPath navMeshPath = new NavMeshPath();

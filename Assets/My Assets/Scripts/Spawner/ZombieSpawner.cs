@@ -11,9 +11,9 @@ public class ZombieSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (aliveCount <= 5)
+        if (aliveCount <= 10)
         {
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 20; ++i)
             {
                 CreateZombie();
             }
@@ -27,8 +27,10 @@ public class ZombieSpawner : MonoBehaviour
 
         // 생성할 위치를 랜덤으로 결정
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        Vector3 randomPos = Random.insideUnitSphere * 3.0f + spawnPoint.position;
+        Vector3 randomPos = Random.insideUnitSphere * 5.0f + spawnPoint.position;
         NavMeshHit navMeshHit;
+
+        randomPos.y = 0.0f;
 
         while (!NavMesh.SamplePosition(randomPos, out navMeshHit, 3.0f, NavMesh.AllAreas)) { }
         

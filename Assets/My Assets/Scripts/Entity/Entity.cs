@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Entity : MonoBehaviour, IDamageable
 {
@@ -91,6 +92,17 @@ public class Entity : MonoBehaviour, IDamageable
         {
             onDeath();
         }
+    }
+
+    public virtual void Recovery(float healPer)
+    {
+        // 이미 사망한 경우 체력을 회복할 수 없음
+        if (isDead)
+        {
+            return;
+        }
+
+        hp += (healPer / 100.0f) * hp;
     }
 
     protected void Inactive(float duration)

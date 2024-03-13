@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 1598801053120921060}
   m_Layer: 7
   m_Name: Normal Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -969,8 +969,8 @@ NavMeshAgent:
   m_Speed: 0.2
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 100
-  m_StoppingDistance: 0
+  m_AngularSpeed: 120
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -1086,7 +1086,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a705791b10aa884594d165e34e22da4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <hp>k__BackingField: 100
   <zombieData>k__BackingField: {fileID: 11400000, guid: 1d82b1620f64dbf4992fba2a179b5b92, type: 2}
 --- !u!1 &5532281528347814245
 GameObject:

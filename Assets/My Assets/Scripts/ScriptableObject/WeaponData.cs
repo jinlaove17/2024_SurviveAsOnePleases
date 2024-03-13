@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponData : ScriptableObject
+[CreateAssetMenu(menuName = "ScriptableObject/Item/Weapon Item", fileName = "Weapon Data")]
+public class WeaponData : ItemData
 {
-    public string weaponName;
-
     public float attackDamage; // 공격력
     public float attackSpeed; // 공격 속도
     public float attackRange; // 공격 범위

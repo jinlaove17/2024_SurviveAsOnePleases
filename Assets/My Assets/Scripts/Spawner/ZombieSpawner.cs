@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieSpawner : MonoBehaviour
+public class ZombieSpawner : Spawner<Zombie>
 {
-    [field: SerializeField] private Zombie[] zombiePrefabs { get; set; }
-    [field: SerializeField] private Transform[] spawnPoints { get; set; }
-    private int aliveCount { get; set; }
-
     private void Update()
     {
-        if (aliveCount <= 10)
+        if (spawnCount <= 10)
         {
             for (int i = 0; i < 20; ++i)
             {
@@ -23,7 +19,7 @@ public class ZombieSpawner : MonoBehaviour
     private void CreateZombie()
     {
         // 생성할 좀비의 종류를 랜덤으로 결정
-        Zombie zombiePrefab = zombiePrefabs[Random.Range(0, zombiePrefabs.Length)];
+        Zombie zombiePrefab = prefabs[Random.Range(0, prefabs.Length)];
 
         // 생성할 위치를 랜덤으로 결정
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
@@ -36,7 +32,7 @@ public class ZombieSpawner : MonoBehaviour
         
         Zombie zombie = PoolManager.instance.GetObject<Zombie>(zombiePrefab.name, navMeshHit.position, spawnPoint.rotation);
 
-        zombie.onDeath += () => --aliveCount;
-        ++aliveCount;
+        zombie.onDeath += () => --spawnCount;
+        ++spawnCount;
     }
 }

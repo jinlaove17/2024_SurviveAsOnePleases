@@ -72,6 +72,8 @@ public class Zombie : Entity
             return;
         }
 
+        float prevHp = hp;
+
         base.OnDamage(from, damage, hitPoint, hitNormal);
 
         if (!isDead)
@@ -84,9 +86,22 @@ public class Zombie : Entity
             
             audioSource.PlayOneShot(zombieData.hitClip);
             UiManager.instance.enemyStatusUi.gameObject.SetActive(true);
-            UiManager.instance.enemyStatusUi.hpBar.SetSliderValue((hp + damage) / zombieData.maxHp);
-            UiManager.instance.enemyStatusUi.hpBar.UpdateHpBar(zombieData.maxHp, hp);
+            UiManager.instance.enemyStatusUi.hpBar.UpdateHpBar(prevHp / zombieData.maxHp, zombieData.maxHp, hp);
         }
+    }
+
+    public override void Recovery(float healPer)
+    {
+        // 이미 사망한 경우 체력을 회복할 수 없음
+        if (isDead)
+        {
+            return;
+        }
+
+        base.Recovery(healPer);
+
+        // 회복이후 hp가 최대 hp를 초과하지 않도록 보정
+        hp = Mathf.Min(hp, zombieData.maxHp);
     }
 
     public virtual void OnAttack()

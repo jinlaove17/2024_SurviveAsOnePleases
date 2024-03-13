@@ -9,11 +9,6 @@ public class HpBarUi : MonoBehaviour
     [field: SerializeField] private Slider slider { get; set; }
     [field: SerializeField] private Coroutine aniRoutine { get; set; }
 
-    public void SetSliderValue(float value)
-    {
-        slider.value = delayedSlider.value = value;
-    }
-
     public void UpdateHpBar(float maxHp, float hp)
     {
         if (aniRoutine != null)
@@ -32,6 +27,12 @@ public class HpBarUi : MonoBehaviour
         {
             aniRoutine = StartCoroutine(HpDecAniRoutine(hpPer));
         }
+    }
+
+    public void UpdateHpBar(float initValue, float maxHp, float hp)
+    {
+        slider.value = delayedSlider.value = initValue;
+        UpdateHpBar(maxHp, hp);
     }
 
     private IEnumerator HpIncAniRoutine(float hpPer)

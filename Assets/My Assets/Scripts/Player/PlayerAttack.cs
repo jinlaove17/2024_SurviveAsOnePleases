@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [field: SerializeField] private Transform weaponPivot { get; set; }
-    [field: SerializeField] private Weapon weapon { get; set; }
+    [field: SerializeField] public Weapon weapon { get; private set; }
     private PlayerInput playerInput { get; set; }
     private Animator playerAnimator { get; set; }
 
@@ -25,11 +25,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (weapon.gameObject.activeSelf)
         {
-            if (playerInput.isAttack)
+            if ((playerInput.input & ACTION.ATTACK) > 0)
             {
                 weapon.Attack();
             }
-            else if (playerInput.isReload)
+            else if ((playerInput.input & ACTION.RELOAD) > 0)
             {
                 weapon.Reload();
             }

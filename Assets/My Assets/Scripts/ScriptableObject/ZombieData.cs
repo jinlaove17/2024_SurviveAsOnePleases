@@ -10,7 +10,7 @@ public struct AttackRange
     public Vector3 size;
 }
 
-[CreateAssetMenu(menuName = "ScriptableObject/ZombieData", fileName = "Zombie Data")]
+[CreateAssetMenu(menuName = "ScriptableObject/Zombie", fileName = "Zombie Data")]
 public class ZombieData : ScriptableObject
 {
     public string zombieName;

@@ -14,19 +14,25 @@ public class PlayerMovement : MonoBehaviour
     [field: SerializeField] private CinemachineVirtualCamera aimCamera { get; set; }
     private Vector3 shift { get; set; }
     private PlayerInput playerInput { get; set; }
+    private PlayerHealth playerHealth { get; set; }
     private Rigidbody playerRigidBody { get; set; }
     private Animator playerAnimator { get; set; }
 
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
+        playerHealth = GetComponent<PlayerHealth>();
         playerRigidBody = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
-        Cursor.lockState = CursorLockMode.Locked;
     }
 
     private void Update()
     {
+        if (playerHealth.isDead)
+        {
+            return;
+        }
+
         UpdateAnimation();
         UpdateCamera();
     }
@@ -34,6 +40,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         Rotate();
+
+        if ((playerHealth.isDead) || (playerHealth.isInteract))
+        {
+            return;
+        }
+
         Move();
     }
 
@@ -42,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
         // 입력값에 따라 애니메이터의 Move 파라미터 값을 변경
         Vector3 move = new Vector3(playerInput.move.x, 0.0f, playerInput.move.z);
 
-        if ((playerInput.isRun) && (move.z > 0.0f))
+        // 앞으로만 뛸 수 있다.
+        if (((playerInput.input & ACTION.RUN) > 0) && (move.z > 0.0f))
         {
             move *= 2.0f;
         }
@@ -79,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Vector3 adjustedShift = shift;
 
-            if (playerInput.isRun)
+            if ((playerInput.input & ACTION.RUN) > 0)
             {
                 if (mag > 2.0f)
                 {
@@ -94,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
 
-            Vector3 moveDistance = moveSpeed * (adjustedShift.x * transform.right + adjustedShift.z * transform.forward) * Time.deltaTime;
+            Vector3 moveDistance = (adjustedShift.x * transform.right + adjustedShift.z * transform.forward) * moveSpeed * Time.deltaTime;
             Vector3 newPosition = playerRigidBody.position + moveDistance;
 
             playerRigidBody.MovePosition(newPosition);
@@ -103,7 +116,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Rotate()
     {
-        Vector2 rotateAngle = rotateSpeed * playerInput.rotate * Time.deltaTime;
+        Vector2 rotateAngle = playerInput.rotate * rotateSpeed * Time.deltaTime;
         Vector3 newAngle = Vector3.zero;
 
         // eulerAngles는 0 ~ 360도의 값을 반환하기 때문에 180도를 넘어가는 값에 대해서는 360도를 빼주어야 한다.
@@ -112,7 +125,7 @@ public class PlayerMovement : MonoBehaviour
         newAngle.y = followTarget.localEulerAngles.y + rotateAngle.x;
         followTarget.localEulerAngles = aimCamera.transform.localEulerAngles = new Vector3(newAngle.x, newAngle.y, 0.0f);
 
-        if (!playerInput.isAround)
+        if ((playerInput.input & ACTION.AROUND) == 0)
         {
             transform.forward = new Vector3(followTarget.forward.x, 0.0f, followTarget.forward.z).normalized;
             followTarget.localEulerAngles = aimCamera.transform.localEulerAngles = new Vector3(followTarget.localEulerAngles.x, 0.0f, 0.0f);

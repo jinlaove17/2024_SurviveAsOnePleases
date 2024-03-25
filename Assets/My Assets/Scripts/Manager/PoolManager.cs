@@ -11,6 +11,7 @@ public class PoolManager : MonoSingleton<PoolManager>
         public string tag;
         public GameObject prefab;
         public int size;
+        public Transform parent;
     }
 
     [field: SerializeField] private PoolObject[] poolObjects { get; set; }
@@ -26,7 +27,7 @@ public class PoolManager : MonoSingleton<PoolManager>
 
             for (int i = 0; i < poolObject.size; ++i)
             {
-                GameObject newObject = CreateNewObject(poolObject.tag, poolObject.prefab);
+                GameObject newObject = CreateNewObject(poolObject.tag, poolObject.prefab, poolObject.parent);
 
                 poolDictionary[poolObject.tag].Add(newObject);
             }
@@ -80,7 +81,7 @@ public class PoolManager : MonoSingleton<PoolManager>
         if (objFromPool == null)
         {
             PoolObject poolObject = Array.Find(poolObjects, (PoolObject poolObj) => poolObj.tag == tag);
-            GameObject newObject = CreateNewObject(poolObject.tag, poolObject.prefab);
+            GameObject newObject = CreateNewObject(poolObject.tag, poolObject.prefab, poolObject.parent);
 
             pool.Add(newObject);
             objFromPool = newObject;
@@ -93,9 +94,9 @@ public class PoolManager : MonoSingleton<PoolManager>
         return objFromPool;
     }
 
-    private GameObject CreateNewObject(string tag, GameObject prefab)
+    private GameObject CreateNewObject(string tag, GameObject prefab, Transform parent)
     {
-        GameObject newObject = Instantiate(prefab, transform);
+        GameObject newObject = Instantiate(prefab, ((parent == null) ? transform : parent));
 
         newObject.name = tag;
         newObject.SetActive(false);

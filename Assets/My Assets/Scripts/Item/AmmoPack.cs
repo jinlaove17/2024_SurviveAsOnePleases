@@ -13,8 +13,6 @@ public class AmmoPack : Item
 
     protected override void Use(Entity entity)
     {
-        Debug.Log("AmmoPack 아이템을 획득하였습니다.");
-
         //PlayerAttack playerAttack = entity.GetComponent<PlayerAttack>();
 
         //if ((playerAttack != null) && (playerAttack.weapon != null))

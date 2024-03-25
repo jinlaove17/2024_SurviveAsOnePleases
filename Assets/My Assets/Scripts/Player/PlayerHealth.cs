@@ -81,7 +81,7 @@ public class PlayerHealth : Entity
         base.OnDamage(from, damage, hitPoint, hitNormal);
         UiManager.instance.playerStatusUi.hpBar.UpdateHpBar(maxHp, hp);
     }
-
+    
     public void OnPickUpExit()
     {
         isInteract = false;

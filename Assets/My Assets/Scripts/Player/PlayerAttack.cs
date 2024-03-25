@@ -17,6 +17,11 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
+        if (UiManager.instance.inventory.isActive)
+        {
+            return;
+        }
+
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weapon.gameObject.SetActive(!weapon.gameObject.activeSelf);

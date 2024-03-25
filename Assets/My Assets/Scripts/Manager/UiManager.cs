@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class UiManager : MonoSingleton<UiManager>
 {
+    [field: SerializeField] public Camera canvasCamera { get; private set; }
     [field: SerializeField] public PlayerStatusUi playerStatusUi { get; private set; }
     [field: SerializeField] public StatusUi enemyStatusUi { get; private set; }
+    [field: SerializeField] public Inventory inventory { get; private set; }
 }

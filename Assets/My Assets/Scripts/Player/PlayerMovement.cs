@@ -26,6 +26,16 @@ public class PlayerMovement : MonoBehaviour
         playerAnimator = GetComponent<Animator>();
     }
 
+    private void FixedUpdate()
+    {
+        if ((playerHealth.isDead) || (playerHealth.isInteract))
+        {
+            return;
+        }
+
+        Move();
+    }
+
     private void Update()
     {
         if (playerHealth.isDead)
@@ -35,18 +45,6 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateAnimation();
         UpdateCamera();
-    }
-
-    private void FixedUpdate()
-    {
-        Rotate();
-
-        if ((playerHealth.isDead) || (playerHealth.isInteract))
-        {
-            return;
-        }
-
-        Move();
     }
 
     private void UpdateAnimation()
@@ -69,6 +67,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCamera()
     {
+        if (UiManager.instance.inventory.isActive)
+        {
+            return;
+        }
+
         switch (playerInput.aimState)
         {
             case PlayerInput.AIM_STATE.ZOOM_IN: // GetMouseButtonDown(1)
@@ -82,6 +85,8 @@ public class PlayerMovement : MonoBehaviour
                 verticalAngle *= 2.0f;
                 break;
         }
+
+        Rotate();
     }
 
     private void Move()

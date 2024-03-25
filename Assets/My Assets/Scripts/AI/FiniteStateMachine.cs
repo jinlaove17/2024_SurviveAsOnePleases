@@ -17,19 +17,19 @@ public class FiniteStateMachine<T> where T : Entity
         }
     }
 
-    public void Update(T owner)
-    {
-        if (curState != null)
-        {
-            curState.Update(owner);
-        }
-    }
-
     public void FixedUpdate(T owner)
     {
         if (curState != null)
         {
             curState.FixedUpdate(owner);
+        }
+    }
+
+    public void Update(T owner)
+    {
+        if (curState != null)
+        {
+            curState.Update(owner);
         }
     }
 }

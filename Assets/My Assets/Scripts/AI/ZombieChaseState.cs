@@ -5,11 +5,6 @@ public class ZombieChaseState : Singleton<ZombieChaseState>, State<Zombie>
         zombie.PrepareChase();
     }
 
-    public void Update(Zombie zombie)
-    {
-
-    }
-
     public void FixedUpdate(Zombie zombie)
     {
         if (zombie.isDead)
@@ -18,6 +13,11 @@ public class ZombieChaseState : Singleton<ZombieChaseState>, State<Zombie>
         }
 
         zombie.Chase();
+    }
+
+    public void Update(Zombie zombie)
+    {
+
     }
 
     public void Exit(Zombie zombie)

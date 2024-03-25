@@ -12,7 +12,8 @@ public abstract class Item : MonoBehaviour, IInteractable
         Animator playerAnimator = from.GetComponent<Animator>();
 
         playerAnimator.SetTrigger("Pick Up");
-        Use(from);
+        UiManager.instance.inventory.AcquireItem(this);
+        gameObject.SetActive(false);
     }
 
     protected abstract void Use(Entity entity);

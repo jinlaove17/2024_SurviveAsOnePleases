@@ -13,8 +13,6 @@ public class HealPack : Item
 
     protected override void Use(Entity entity)
     {
-        Debug.Log("HealPack 아이템을 획득하였습니다.");
-
         entity.Recovery(healPer);
 
         // 사용되었으므로 비활성화

@@ -5,11 +5,6 @@ public class ZombiePatrolState : Singleton<ZombiePatrolState>, State<Zombie>
         zombie.PreparePatrol();
     }
 
-    public void Update(Zombie zombie)
-    {
-
-    }
-
     public void FixedUpdate(Zombie zombie)
     {
         if (zombie.isDead)
@@ -18,6 +13,11 @@ public class ZombiePatrolState : Singleton<ZombiePatrolState>, State<Zombie>
         }
 
         zombie.Patrol();
+    }
+
+    public void Update(Zombie zombie)
+    {
+
     }
 
     public void Exit(Zombie zombie)

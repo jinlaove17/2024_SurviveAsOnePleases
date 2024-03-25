@@ -37,14 +37,14 @@ public class Zombie : Entity
         target = null;
     }
 
-    private void Update()
-    {
-        fsm.Update(this);
-    }
-
     private void FixedUpdate()
     {
         fsm.FixedUpdate(this);
+    }
+
+    private void Update()
+    {
+        fsm.Update(this);
     }
 
     private void OnDrawGizmos()

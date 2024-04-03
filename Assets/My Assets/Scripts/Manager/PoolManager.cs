@@ -87,7 +87,16 @@ public class PoolManager : MonoSingleton<PoolManager>
             objFromPool = newObject;
         }
 
-        objFromPool.transform.position = position;
+        // Ui의 경우, RectTransform을 사용하므로 position 값을 transform.position에 설정하면 다른 위치에 배치된다.
+        if (objFromPool.TryGetComponent(out RectTransform rectTransform))
+        {
+            rectTransform.anchoredPosition = position;
+        }
+        else
+        {
+            objFromPool.transform.position = position;
+        }
+
         objFromPool.transform.rotation = rotation;
         objFromPool.SetActive(true);
 

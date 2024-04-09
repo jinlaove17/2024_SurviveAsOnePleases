@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerHealth : Entity
 {
     [field: SerializeField] private float maxHp { get; set; }
-    [field: SerializeField] private InteractionUi interactionUi { get; set; }
+
     private PlayerInput playerInput { get; set; }
     public bool isInteract { get; private set; }
     private IInteractable interactableObj { get; set; }
@@ -23,7 +23,6 @@ public class PlayerHealth : Entity
         hp = maxHp;
         UiManager.instance.playerStatusUi.hpBar.UpdateHpBar(maxHp, hp);
         interactableObj = null;
-        interactionUi.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -33,7 +32,7 @@ public class PlayerHealth : Entity
             isInteract = true;
             interactableObj.Interact(this);
             interactableObj = null;
-            interactionUi.gameObject.SetActive(false);
+            UiManager.instance.interactionUi.gameObject.SetActive(false);
         }
     }
 
@@ -58,8 +57,9 @@ public class PlayerHealth : Entity
                     StringBuilder sb = new StringBuilder();
 
                     sb.AppendFormat($"{item.itemData.name} »πµÊ«œ±‚");
-                    interactionUi.SetText(sb);
-                    interactionUi.gameObject.SetActive(true);
+                    UiManager.instance.interactionUi.SetText(sb);
+                    UiManager.instance.interactionUi.gameObject.SetActive(true);
+                    UiManager.instance.inventoryUi.InsertAroundItem(item);
                 }
             }
         }
@@ -68,7 +68,7 @@ public class PlayerHealth : Entity
     private void OnTriggerExit(Collider other)
     {
         interactableObj = null;
-        interactionUi.gameObject.SetActive(false);
+        UiManager.instance.interactionUi.gameObject.SetActive(false);
     }
 
     public override void OnDamage(Entity from, float damage, Vector3 hitPoint, Vector3 hitNormal)

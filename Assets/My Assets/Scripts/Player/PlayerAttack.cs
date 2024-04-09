@@ -17,7 +17,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (UiManager.instance.inventory.isActive)
+        if (UiManager.instance.inventoryUi.isActive)
         {
             return;
         }

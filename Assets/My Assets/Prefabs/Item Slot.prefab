@@ -435,6 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 619f2a559bb6d1940b42dbbcb6893d44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  autoApplySize: 1
   <itemImage>k__BackingField: {fileID: 7988759571555401225}
   <itemText>k__BackingField: {fileID: 7988759572271204828}
   <countText>k__BackingField: {fileID: 7988759571915732338}

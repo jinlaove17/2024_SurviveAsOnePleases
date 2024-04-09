@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void UpdateCamera()
     {
-        if (UiManager.instance.inventory.isActive)
+        if (UiManager.instance.inventoryUi.isActive)
         {
             return;
         }

@@ -25,7 +25,6 @@ public class PlayerAttack : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             weapon.gameObject.SetActive(!weapon.gameObject.activeSelf);
-            playerAnimator.SetLayerWeight(1, (weapon.gameObject.activeSelf) ? 1.0f : 0.0f);
         }
 
         if (weapon.gameObject.activeSelf)

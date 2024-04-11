@@ -8,11 +8,6 @@ public abstract class Item : MonoBehaviour, IInteractable
 {
     [field: SerializeField] public ItemData itemData { get; private set; }
 
-    private void OnDisable()
-    {
-        UiManager.instance.inventoryUi.DeleteAroundItem(this);
-    }
-
     private void OnTriggerExit(Collider other)
     {
         UiManager.instance.inventoryUi.DeleteAroundItem(this);
@@ -20,9 +15,10 @@ public abstract class Item : MonoBehaviour, IInteractable
 
     public void Interact(Entity from)
     {
-        Animator playerAnimator = from.GetComponent<Animator>();
+        PlayerHealth player = (PlayerHealth)from;
 
-        playerAnimator.SetTrigger("Pick Up");
+        player.PickUpItem();
+        UiManager.instance.inventoryUi.DeleteAroundItem(this);
         UiManager.instance.inventoryUi.AcquireItem(this);
         gameObject.SetActive(false);
     }

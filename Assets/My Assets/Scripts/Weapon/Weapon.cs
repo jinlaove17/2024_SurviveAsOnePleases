@@ -38,6 +38,15 @@ public abstract class Weapon : MonoBehaviour
     {
         state = STATE.READY;
         lastAttackTime = 0.0f;
+        
+        // 무기가 활성화 되면 플레이어 애니메이터의 Upper Body Layer의 가중치를 1로 만든다.
+        owner.GetComponent<Animator>().SetLayerWeight(1, 1.0f);
+    }
+    
+    protected virtual void OnDisable()
+    {
+        // 무기가 비활성화 되면 플레이어 애니메이터의 Upper Body Layer의 가중치를 0으로 만든다.
+        owner.GetComponent<Animator>().SetLayerWeight(1, 0.0f);
     }
 
     public virtual void Attack()

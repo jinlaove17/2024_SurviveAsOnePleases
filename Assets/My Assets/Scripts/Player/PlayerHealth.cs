@@ -7,14 +7,19 @@ public class PlayerHealth : Entity
 {
     [field: SerializeField] private float maxHp { get; set; }
 
+    private Animator playerAnimator { get; set; }
     private PlayerInput playerInput { get; set; }
+    private PlayerAttack playerAttack { get; set; }
+    private bool isWeaponEquipped { get; set; }
     public bool isInteract { get; private set; }
     private IInteractable interactableObj { get; set; }
 
     protected override void Awake()
     {
         base.Awake();
+        playerAnimator = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        playerAttack = GetComponent<PlayerAttack>();
     }
 
     protected override void OnEnable()
@@ -27,6 +32,11 @@ public class PlayerHealth : Entity
 
     private void Update()
     {
+        if (isInteract)
+        {
+            return;
+        }
+
         if (((playerInput.input & ACTION.INTERACT) > 0) && (interactableObj != null))
         {
             isInteract = true;
@@ -81,10 +91,27 @@ public class PlayerHealth : Entity
         base.OnDamage(from, damage, hitPoint, hitNormal);
         UiManager.instance.playerStatusUi.hpBar.UpdateHpBar(maxHp, hp);
     }
-    
+
+    public void PickUpItem()
+    {
+        isWeaponEquipped = playerAttack.weapon.gameObject.activeSelf;
+
+        if (isWeaponEquipped)
+        {
+            playerAttack.weapon.gameObject.SetActive(false);
+        }
+
+        playerAnimator.SetTrigger("Pick Up");
+    }
+
     public void OnPickUpExit()
     {
         isInteract = false;
+
+        if (isWeaponEquipped)
+        {
+            playerAttack.weapon.gameObject.SetActive(true);
+        }
     }
 
     public override void Recovery(float healPer)

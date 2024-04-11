@@ -4239,8 +4239,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <poolObjects>k__BackingField:
-  - tag: Item Slot
-    prefab: {fileID: 7988759572888312344, guid: a16d06d122190564e9cd05a0ba7589fc, type: 3}
+  - tag: Normal Zombie
+    prefab: {fileID: 5448204834400861477, guid: b54574a32750b004dadf5b4d45f2d445, type: 3}
     size: 10
     parent: {fileID: 0}
 --- !u!4 &1277116376
